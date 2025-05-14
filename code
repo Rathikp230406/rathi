@@ -1,0 +1,35 @@
+import random
+import time
+
+# Simulate seismograph sensor data
+def get_seismic_data():
+    return {
+        "magnitude": round(random.uniform(2.0, 9.0), 2),
+        "vibrations": round(random.uniform(0.1, 5.0), 2),  # Ground vibration intensity
+        "depth": round(random.uniform(1, 700), 1)  # Depth in kilometers
+    }
+
+# Basic logic for earthquake threat detection
+def predict_earthquake(data):
+    if data["magnitude"] > 6.5 and data["vibrations"] > 2.5:
+        return True
+    return False
+
+# Alert system
+def send_earthquake_alert(data):
+    print(f"\nEARTHQUAKE ALERT!")
+    print(f"Magnitude: {data['magnitude']} | Vibrations: {data['vibrations']} | Depth: {data['depth']} km")
+    print("Emergency protocols triggered.\n")
+
+# Main monitoring loop
+def monitor_earthquake():
+    print("Starting Earthquake Monitoring System...\n")
+    for _ in range(10):  # Demo loop
+        data = get_seismic_data()
+        print(f"Seismic Data: {data}")
+        if predict_earthquake(data):
+            send_earthquake_alert(data)
+        time.sleep(2)
+
+if __name__ == "__main__":
+    monitor_earthquake()
